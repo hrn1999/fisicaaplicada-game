@@ -161,6 +161,7 @@ public class Shooter : MonoBehaviour{
         m_CurrentState = ShooterState.None;
         spawn();
         transform.rotation = Quaternion.identity;
+
         jogadas++;
 
         if (jogadas == 6 && GameObject.Find("Alvo").GetComponent<triggerEnter>().entrou == true){
