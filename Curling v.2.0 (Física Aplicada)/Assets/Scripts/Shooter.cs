@@ -94,18 +94,17 @@ public class Shooter : MonoBehaviour{
 
     void spawn(){
         if (player == 0){
-            objeto = Instantiate(player1, new Vector3(5.8f , 1.0f, 0.0f), transform.rotation * Quaternion.identity) as GameObject;
+            objeto = Instantiate(player1, new Vector3(4.0f , 1.0f, 0.0f), transform.rotation * Quaternion.identity) as GameObject;
             objeto.name = "Pinguim1";
             camera.target = objeto.transform;
             player = 1;
         }else{
             RotateArrow(0, 0);
-            objeto = Instantiate(player2, new Vector3(5.8f, 1.0f, 0.0f), transform.rotation * Quaternion.identity) as GameObject;
+            objeto = Instantiate(player2, new Vector3(4.0f, 1.0f, 0.0f), Quaternion.identity) as GameObject;
             objeto.name = "Pinguim2";
             camera.target = objeto.transform;
             player = 0;
         }
-        objeto.transform.rotation = Quaternion.identity;
     }
 
     private void Shoot(){
@@ -160,8 +159,6 @@ public class Shooter : MonoBehaviour{
         objeto.GetComponent<Rigidbody>().velocity = Vector3.zero;
         m_CurrentState = ShooterState.None;
         spawn();
-        transform.rotation = Quaternion.identity;
-
         jogadas++;
 
         if (jogadas == 6 && GameObject.Find("Alvo").GetComponent<triggerEnter>().entrou == true){
