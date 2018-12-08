@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: fd73c79680d1e3649934a616d33fad64
+guid: 00b8728b37a49b74a8424ed4cd2ae51f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Player_2
+    100000: Player1
     100002: //RootNode
-    400000: Player_2
+    400000: Player1
     400002: //RootNode
-    2100000: Player_2Mat
-    2300000: Player_2
-    3300000: Player_2
-    4300000: Player_2
+    2100000: Player1Mat
+    2300000: Player1
+    3300000: Player1
+    4300000: Player1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -83,7 +83,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

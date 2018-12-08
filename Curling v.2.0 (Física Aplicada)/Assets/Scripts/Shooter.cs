@@ -33,6 +33,13 @@ public class Shooter : MonoBehaviour{
     public TextMeshProUGUI redWin;
 
     [Header("Outros")]
+    public ParticleSystem m_RedExplosion;
+    public ParticleSystem m_BlueExplosion;
+    public ParticleSystem[] m_RedFlamethrowerEsq;
+    public ParticleSystem[] m_RedFlamethrowerDir;
+    public ParticleSystem[] m_BlueFlamethrowerEsq;
+    public ParticleSystem[] m_BlueFlamethrowerDir;
+    public Explosion explosion;
     public CameraFollow camera;
     public GameObject player1;
     public GameObject player2;
@@ -87,13 +94,13 @@ public class Shooter : MonoBehaviour{
 
     void spawn(){
         if (player == 0){
-            objeto = Instantiate(player1, new Vector3(5.8f , 1.0f, 0.0f), Quaternion.identity) as GameObject;
+            objeto = Instantiate(player1, new Vector3(4.0f , 1.0f, 0.0f), transform.rotation * Quaternion.identity) as GameObject;
             objeto.name = "Pinguim1";
             camera.target = objeto.transform;
             player = 1;
         }else{
             RotateArrow(0, 0);
-            objeto = Instantiate(player2, new Vector3(5.8f, 1.0f, 0.0f), Quaternion.identity) as GameObject;
+            objeto = Instantiate(player2, new Vector3(4.0f, 1.0f, 0.0f), Quaternion.identity) as GameObject;
             objeto.name = "Pinguim2";
             camera.target = objeto.transform;
             player = 0;
@@ -163,7 +170,7 @@ public class Shooter : MonoBehaviour{
                 redPoints++;
                 redPointsText.text = redPoints.ToString();
             }
-            alvo.destroyAll();
+            
             StartCoroutine(CheckWin());
             jogadas = 0;
         }else if (jogadas == 6 && GameObject.Find("Alvo").GetComponent<triggerEnter>().entrou == false){
@@ -174,12 +181,28 @@ public class Shooter : MonoBehaviour{
     }
 
     private IEnumerator CheckWin(){
-        if (bluePoints == 3){
+        if (bluePoints == 1){
             blueWin.gameObject.SetActive(true);
-            yield return new WaitForSeconds(3.0f);
+            m_BlueExplosion.Play();
+            explosion.GetComponent<Explosion>().Explode();
+            for(int i=m_BlueFlamethrowerEsq.Length-1; i>=0; i--)
+            {
+                m_BlueFlamethrowerEsq[i].Play();
+                m_BlueFlamethrowerDir[i].Play();
+                yield return new WaitForSeconds(0.5f);
+            }
+            yield return new WaitForSeconds(5.0f);
             SceneManager.LoadScene("MenuScene");
-        }else if (redPoints==3){
+        }else if (redPoints==1){
             redWin.gameObject.SetActive(true);
+            m_RedExplosion.Play();
+            explosion.GetComponent<Explosion>().Explode();
+            for (int i = m_RedFlamethrowerEsq.Length - 1; i >= 0; i--)
+            {
+                m_RedFlamethrowerEsq[i].Play();
+                m_RedFlamethrowerDir[i].Play();
+                yield return new WaitForSeconds(0.5f);
+            }
             yield return new WaitForSeconds(3.0f);
             SceneManager.LoadScene("MenuScene");
         }
