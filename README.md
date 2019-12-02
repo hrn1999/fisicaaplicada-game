@@ -1,1 +1,1 @@
-# Curling Penguin
+# Curling Penguin (itch.io version)
